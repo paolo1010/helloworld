@@ -4,7 +4,7 @@ pipeline{
     maven 'M2_HOME'
   }
   environment {
-    registry = "agbonnon10/devops-pipeline"
+    registry = "agbonnon10/development"
     registryCredential = 'Docker_ID2'
   }
   stages {
