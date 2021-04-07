@@ -3,6 +3,10 @@ pipeline{
   tools {
     maven 'M2_HOME'
   }
+  environment {
+    registry = "agbonnon10/devops-pipeline"
+    registryCredential = 'Docker_ID2'
+  }
   stages {
     stage('Build'){
       steps {
@@ -11,22 +15,15 @@ pipeline{
         sh 'mvn package'
       }
     }
-    stage('test'){
+    stage('Test'){
       steps {
         echo "test step"
         sh 'mvn test'
       }
     }
-    stage('deploy'){
+    stage('Deploy'){
       steps {
-        echo "deploy step"
-        sleep 10
-      }
-    }
-    stage('docker'){
-      steps {
-        echo "image step"
-        sleep 10
+        docker.build registry + ":$BUILD_NUMBER"
       }
     }
   }
